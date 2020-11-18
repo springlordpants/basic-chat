@@ -25,8 +25,11 @@ function App() {
   const [user] = useAuthState(auth)
 
   return (
-    <div>
-      <header></header>
+    <div className="App">
+      <header>
+        <h1>⚛🔥💬</h1>
+        <SignOut />
+      </header>
       <section>{user ? <ChatRoom /> : <SignIn />}</section>
     </div>
   )
@@ -38,7 +41,11 @@ function SignIn() {
     auth.signInWithPopup(provider)
   }
 
-  return <button onClick={signInWithGoogle}>Sign in with Google</button>
+  return (
+    <button className="sign-in" onClick={signInWithGoogle}>
+      Sign in with Google
+    </button>
+  )
 }
 
 function SignOut() {
@@ -76,17 +83,21 @@ function ChatRoom() {
 
   return (
     <>
-      <div>
-        {messages &&
-          messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
-        <div ref={dummy}></div>
-      </div>
+      <main>
+        <div>
+          {messages &&
+            messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+          <span ref={dummy}></span>
+        </div>
+      </main>
       <form onSubmit={sendMessage}>
         <input
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
         />
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={!formValue}>
+          Submit
+        </button>
       </form>
     </>
   )
