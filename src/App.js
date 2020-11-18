@@ -25,7 +25,7 @@ function App() {
   const [user] = useAuthState(auth)
 
   return (
-    <div className="App">
+    <div>
       <header></header>
       <section>{user ? <ChatRoom /> : <SignIn />}</section>
     </div>
